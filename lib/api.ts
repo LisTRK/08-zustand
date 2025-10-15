@@ -10,9 +10,6 @@ axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.headers.common.Authorization = `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`;
 
-// export const getTag = (tag: string): Tag => { 
-//   return tag === "All" ? "" : tag as Tag;
-// }
 
 export const fetchNotes = async (search?: string, page?: number, tag?: Tag): Promise<NotesDataType> => { 
   

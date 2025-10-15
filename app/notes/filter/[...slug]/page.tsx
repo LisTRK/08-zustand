@@ -7,7 +7,6 @@ import {
 } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
-// import NotesClient from './Notes.client';
 
 interface generationMetadataProps {
   params: Promise<{ slug: string[] }>;
@@ -17,6 +16,8 @@ export async function generateMetadata({
   params,
 }: generationMetadataProps): Promise<Metadata> {
   const { slug } = await params;
+  console.log("slug: ", slug);
+
   const tag: Tag | string = slug[0];
   return {
     title: `Notes - ${tag === "All" ? "All tags" : tag}`,
@@ -25,6 +26,7 @@ export async function generateMetadata({
     }. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
     openGraph: {
       title: `Notes - ${tag === "All" ? "All tags" : tag}`,
+      url: `https://notehub.com/notes/filter/${tag}`,
       description: `Browse notes tagged with ${
         tag === "All" ? "all tags" : tag
       }. NoteHub allows you to filter and view notes based on specific tags for better organization.`,

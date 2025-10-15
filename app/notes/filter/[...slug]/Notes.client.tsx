@@ -8,8 +8,6 @@ import css from "./page.module.css";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import NoteList from "@/components/NoteList/NoteList";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import { Tag } from "@/types/note";
 import Link from "next/link";
 

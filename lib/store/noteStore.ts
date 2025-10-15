@@ -6,7 +6,7 @@ import { CreateNoteProps, Tag } from '@/types/note';
 
 interface DraftNote{
     title: string;
-    content?: string;
+    content: string;
     tag: Tag;
 }
 
@@ -18,8 +18,8 @@ type NoteDraftStore = {
 
 const initialDraft: CreateNoteProps = {
   title: "",
-      content: "",
-      tag: "Todo",
+  content: "",
+  tag: "Todo",
 };
 
 

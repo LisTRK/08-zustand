@@ -13,7 +13,7 @@ export interface Note {
 
 export interface CreateNoteProps{
       title: string,
-      content?: string,
+      content: string,
       tag: Tag,
 }
 

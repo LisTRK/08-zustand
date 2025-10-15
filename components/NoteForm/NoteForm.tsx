@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createNote } from "../../lib/api";
 import type { CreateNoteProps, Tag } from "../../types/note";
@@ -14,9 +14,11 @@ const NoteForm = () => {
 
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
 
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: createNote,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["notes"] });
       clearDraft();
       router.back();
     },

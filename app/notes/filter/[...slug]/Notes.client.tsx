@@ -11,6 +11,7 @@ import NoteList from "@/components/NoteList/NoteList";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 import { Tag } from "@/types/note";
+import Link from "next/link";
 
 interface NotesClientProps {
   tag?: Tag;
@@ -19,7 +20,6 @@ interface NotesClientProps {
 const NotesClient = ({ tag }: NotesClientProps) => {
   const [page, setPage] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const queryDebounced = useDebouncedCallback((value: string) => {
     setQuery(value);
@@ -31,10 +31,6 @@ const NotesClient = ({ tag }: NotesClientProps) => {
     queryFn: () => fetchNotes(query, page, tag),
     placeholderData: keepPreviousData,
   });
-
-  const handleOpenModal = () => {
-    setIsOpenModal(!isOpenModal);
-  };
 
   return (
     <div className={css.app}>
@@ -52,17 +48,12 @@ const NotesClient = ({ tag }: NotesClientProps) => {
         )}
 
         {/* Кнопка створення нотатки */}
-        <button onClick={handleOpenModal} className={css.button}>
+        <Link href={"/notes/action/create"} className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isSuccess && <NoteList notes={data?.notes ?? []} />}
-      {isOpenModal && (
-        <Modal onClose={handleOpenModal}>
-          <NoteForm onClose={handleOpenModal} />
-        </Modal>
-      )}
     </div>
   );
 };

@@ -6,13 +6,41 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
+import { Metadata } from "next";
 // import NotesClient from './Notes.client';
 
-interface NotesPageProps {
+interface generationMetadataProps {
   params: Promise<{ slug: string[] }>;
 }
 
-const NotesPage = async ({ params }: NotesPageProps) => {
+export async function generateMetadata({
+  params,
+}: generationMetadataProps): Promise<Metadata> {
+  const { slug } = await params;
+  const tag: Tag | string = slug[0];
+  return {
+    title: `Notes - ${tag === "All" ? "All tags" : tag}`,
+    description: `Browse notes tagged with ${
+      tag === "All" ? "all tags" : tag
+    }. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
+    openGraph: {
+      title: `Notes - ${tag === "All" ? "All tags" : tag}`,
+      description: `Browse notes tagged with ${
+        tag === "All" ? "all tags" : tag
+      }. NoteHub allows you to filter and view notes based on specific tags for better organization.`,
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: `Notes - ${tag === "All" ? "All tags" : tag} | NoteHub`,
+        },
+      ],
+    },
+  };
+}
+
+const NotesPage = async ({ params }: generationMetadataProps) => {
   const { slug } = await params;
   const queryClient = new QueryClient();
 

@@ -51,7 +51,9 @@ const NotesClient = ({ tag }: NotesClientProps) => {
         </Link>
       </header>
 
-      {isSuccess && <NoteList notes={data?.notes ?? []} />}
+      {isSuccess && data?.notes.length > 0 && (
+        <NoteList notes={data.notes ?? []} />
+      )}
     </div>
   );
 };

@@ -16,7 +16,7 @@ type NoteDraftStore = {
     clearDraft: () => void;
 }
 
-const initialDraft: CreateNoteProps = {
+const initialDraft: DraftNote = {
   title: "",
   content: "",
   tag: "Todo",
